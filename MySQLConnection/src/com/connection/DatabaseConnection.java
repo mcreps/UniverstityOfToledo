@@ -234,7 +234,7 @@ public class DatabaseConnection {
 	public void closeConnection(Connection connection) {
 		if (null != connection) {			
 			try {
-				logger.debug("Attempting to closing the database connection");
+				logger.debug("Attempting to closing the database connection.");
 				if (!connection.isClosed()) {
 					connection.close();
 				}
