@@ -21,7 +21,7 @@ import com.exceptions.DriverNotFoundException;
  * 
  *
  */
-public class DatabaseConnection {
+public class DatabaseManager {
 
 	private String uri;
 	private String driver;
@@ -33,7 +33,7 @@ public class DatabaseConnection {
 	private String databaseType;
 	private Connection connection = null;
 	private Properties prop;
-	final static Logger logger = Logger.getLogger(DatabaseConnection.class);
+	final static Logger logger = Logger.getLogger(DatabaseManager.class);
 
 	public String getUri() {
 		return uri;
@@ -159,14 +159,14 @@ public class DatabaseConnection {
 
 	}
 	
-	public DatabaseConnection() {
+	public DatabaseManager() {
 	}
 	
 	/**
 	 * Loads the default setting from the Properties object.
 	 * @param prop database connection properties class
 	 */
-	public DatabaseConnection(Properties prop) {
+	public DatabaseManager(Properties prop) {
 		loadProperties(prop);
 	}
 	
@@ -174,7 +174,7 @@ public class DatabaseConnection {
 	 * Loads the default setting from the properties files.
 	 * @param propertiesFile fully qualified path to properties file
 	 */
-	public DatabaseConnection(String propertiesFile) {
+	public DatabaseManager(String propertiesFile) {
 		logger.debug("Reading properties file.");
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -196,13 +196,13 @@ public class DatabaseConnection {
 	}
 	
 	/**
-	 * Establish a MySQL Connection to the default database for the specified URL
-	 * @return {@code null} if no connection can be made or  MySql Connection.
+	 * Establish a database connection for the specified URL
+	 * @return {@code null} if no connection can be made.
 	 */
-	public Connection establishMySqlConnection() {
+	public Connection establishConnection() {
 			
 		// Get Driver	
-		logger.debug("Location suitable driver.");		
+		logger.debug("Locating a suitable driver.");		
 		try {
 			Class.forName(this.driver).newInstance();
 		} 
@@ -247,7 +247,7 @@ public class DatabaseConnection {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("DatabaseConnection [uri=");
+		builder.append("DatabaseManager [uri=");
 		builder.append(uri);
 		builder.append(", driver=");
 		builder.append(driver);
