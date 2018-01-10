@@ -226,6 +226,23 @@ public class DatabaseConnection {
 		}
 		return this.connection;
 	}
+	
+	/**
+	 * Closes a database connection
+	 * @param connection
+	 */
+	public void closeConnection(Connection connection) {
+		if (null != connection) {			
+			try {
+				logger.debug("Attempting to closing the database connection");
+				if (!connection.isClosed()) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				logger.error(e.getLocalizedMessage());
+			}
+		}
+	}
 
 	@Override
 	public String toString() {
