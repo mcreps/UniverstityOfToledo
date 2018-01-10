@@ -8,6 +8,10 @@ public class runnable {
 
 		DatabaseConnection databaseConnection = new DatabaseConnection("database.properties");			
 		Connection connection = databaseConnection.establishMySqlConnection();
+		if (null == connection) {
+			System.exit(1);
+		}
+		
 		
 		
 
