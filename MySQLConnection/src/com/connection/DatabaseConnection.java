@@ -9,8 +9,8 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
+import com.exceptions.DatabaseAccessException;
 import com.exceptions.DriverNotFoundException;
-import com.exceptions.MySqlAccessException;
 
 /**
  * 
@@ -222,7 +222,7 @@ public class DatabaseConnection {
 		catch (SQLException | RuntimeException e) {
 			logger.error("No connected made to " + this.defaultDatabase + ".  Message:" + e.getLocalizedMessage());
 			logger.error(this);
-			throw new MySqlAccessException(e.getLocalizedMessage());
+			throw new DatabaseAccessException(e.getLocalizedMessage());
 		}
 		return this.connection;
 	}
