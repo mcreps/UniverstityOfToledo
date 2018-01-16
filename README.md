@@ -1,14 +1,34 @@
-# Welcome to EET4250 Source Code Repository
+# Welcome to the EET 4250 Source Code Repository
 
+All neccessary class and jars files that are necessary to complete the course.
 
-### Dounload the entire repository and add the jdbc jars to the classpath
-### Files were created using eclipse
-### Currently we are using a MySQL Database
-### Link to MySQL Query Workbench https://dev.mysql.com/downloads/workbench/
+## Usage
+1. Download the entire project.
+2. Add the jdbc jars to the classpath
+3. Build and save a database.properties files in the root directory
+4. Test to make sure you can connect to the database
 
-### property files are laid out using the following format key=value
-- serverIpAddress=131.183.223.157
-- userName=mcreps-
-- password=
-- defaultdatabase=merl.crepsjr
+## History
+
+Current version allows for connections to MySQL, POSTgres, Orcale, and a SQL Server (integrated security is off).
+
+## Credits
+
+Author: Merl Creps
+
+## License
+Copyright [2004] [Apache 2.0]
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
 
