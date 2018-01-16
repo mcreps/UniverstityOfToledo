@@ -6,3 +6,9 @@
 ### Currently we are using a MySQL Database
 ### Link to MySQL Query Workbench https://dev.mysql.com/downloads/workbench/
 
+### property files are laid out using the following format key=value
+- serverIpAddress=131.183.223.157
+- userName=mcreps-
+- password=
+- defaultdatabase=merl.crepsjr
+
