@@ -4,10 +4,11 @@ All neccessary class and jars files that are necessary to complete the course.
 
 ## Usage
 1. Project was built using eclipse OXYGEN
-2. Clone the project.
+2. Clone the project into a workspace
 3. Add the jdbc jars to the classpath
-4. Build and save a database.properties files in the root directory
-5. Test to make sure you can connect to the database
+4. Add the Connection jar to the classpath
+5. Build and save a database.properties files in the root directory
+6. Test to make sure you can connect to the database
 
 ## History
 
