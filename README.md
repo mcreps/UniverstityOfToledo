@@ -3,7 +3,7 @@
 All neccessary class and jars files that are necessary to complete the course.
 
 ## Usage
-1. Download the entire project.
+1. Clone the project.
 2. Add the jdbc jars to the classpath
 3. Build and save a database.properties files in the root directory
 4. Test to make sure you can connect to the database
