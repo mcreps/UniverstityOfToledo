@@ -32,6 +32,14 @@ public class runnable {
 			Example2 ex2 = new Example2();
 			ex2.displayEquipmentType(connection);
 		}
+		
+		if ("ic1".equals(name)) {
+			TableBuilds tb = new TableBuilds();
+			tb.buildTables(connection);
+			
+			InsertCourses insertCourses = new InsertCourses();
+			insertCourses.inserts(connection);
+		}
 
 		/* Close the database connection */
 		databaseManager.closeConnection(connection);
