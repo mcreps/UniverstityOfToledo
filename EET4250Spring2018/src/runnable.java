@@ -1,15 +1,16 @@
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Scanner;
-import java.util.logging.Logger;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.connection.DatabaseManager;
 
 public class runnable {
 
+	private static Logger logger = LoggerFactory.getLogger(runnable.class);	
+	
 	public static void main(String[] args) {
+					
 		/* Make a database connections with properties files */
 		DatabaseManager databaseManager = new DatabaseManager("database.properties");
 		Connection connection = databaseManager.establishConnection();
@@ -24,16 +25,19 @@ public class runnable {
 		String name = scanner.nextLine();
 		
 		if ("ex1".equals(name)) {
+			logger.debug("Running Example 1");
 			Example1 ex1 = new Example1();
 			ex1.displayExample1(connection);
 		}
 		
 		if ("ex2".equals(name)) {
+			logger.debug("Running Example 2");
 			Example2 ex2 = new Example2();
 			ex2.displayEquipmentType(connection);
 		}
 		
 		if ("ic1".equals(name)) {
+			logger.debug("Running Inclass 1");
 			TableBuilds tb = new TableBuilds();
 			tb.buildTables(connection);
 			

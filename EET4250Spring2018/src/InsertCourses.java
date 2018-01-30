@@ -2,11 +2,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class InsertCourses {
 
+	private static Logger logger = LoggerFactory.getLogger(runnable.class);
 	
 	public void inserts(Connection connection) {
 		
+		logger.debug("Entering inserts.");
+
 		String sql = "INSERT INTO Course ( " + 
 		" CourseRowId, CourseId, InstructorId, CreditHrs ) " + 
 		" VALUES (?, ?, ? ,?) ";
@@ -21,9 +27,7 @@ public class InsertCourses {
 			System.out.println("Rows Affected: "+rowsAffected);
 		}
 		catch (SQLException e) {
-			System.err.println(e.toString());
-		}
-			
-		
+			logger.error(e.toString());
+		}	
 	}
 }
