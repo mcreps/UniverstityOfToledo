@@ -45,8 +45,9 @@ public class runnable {
 			insertCourses.inserts(connection);
 		}
 
+		
 		/* Close the database connection */
 		databaseManager.closeConnection(connection);
+		logger.debug("Program completed");
 	}
-
 }
