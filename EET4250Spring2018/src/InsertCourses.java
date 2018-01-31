@@ -3,13 +3,19 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class InsertCourses {
 
+	private static Logger logger = LoggerFactory.getLogger(runnable.class);
 	
 	public void inserts(Connection connection) {
 		
 		Scanner scanner = new Scanner(System.in);
 		
+		logger.debug("Entering inserts.");
+
 		String sql = "INSERT INTO Course ( " + 
 		" CourseId, InstructorId, CreditHrs, Semester, Year ) " + 
 		" VALUES (?, ? ,?, ?, ?) ";
@@ -43,8 +49,8 @@ public class InsertCourses {
 
 			}
 			catch (SQLException e) {
-				System.err.println(e.toString());
+				logger.error(e.toString());
 			}
-		}
+		}	
 	}
 }
