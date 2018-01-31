@@ -1,29 +1,50 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 public class InsertCourses {
 
 	
 	public void inserts(Connection connection) {
 		
+		Scanner scanner = new Scanner(System.in);
+		
 		String sql = "INSERT INTO Course ( " + 
-		" CourseRowId, CourseId, InstructorId, CreditHrs ) " + 
-		" VALUES (?, ?, ? ,?) ";
+		" CourseId, InstructorId, CreditHrs, Semester, Year ) " + 
+		" VALUES (?, ? ,?, ?, ?) ";
 		
-		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
-			ps.setInt(1, 0);
-			ps.setString(2, "EET 4250");
-			ps.setInt(3, 0);
-			ps.setInt(4, 4);
-			int rowsAffected = ps.executeUpdate();
-			System.out.println("Rows Affected: "+rowsAffected);
-		}
-		catch (SQLException e) {
-			System.err.println(e.toString());
-		}
+		int rowsAffected=0;
+		
+		for (int x=0;x<9;x++) {
+			System.out.print("Enter Course Id: ");
+			String coursId = scanner.nextLine();
 			
-		
+			System.out.print("Enter Instructor Id: ");
+			int instructorId = Integer.parseInt(scanner.nextLine());
+			
+			System.out.print("Enter Credit Hours: ");
+			int creditHours = Integer.parseInt(scanner.nextLine());			
+			
+			System.out.print("Enter Semester: ");
+			String semester = scanner.nextLine();
+			
+			System.out.print("Enter Year Offered: ");
+			int yearOffered = Integer.parseInt(scanner.nextLine());
+			
+			try {
+				PreparedStatement ps = connection.prepareStatement(sql);
+				ps.setString(1, coursId);
+				ps.setInt(2, instructorId);
+				ps.setInt(3, creditHours);
+				ps.setString(4, semester);
+				ps.setInt(5, yearOffered);
+				rowsAffected =+ ps.executeUpdate();
+
+			}
+			catch (SQLException e) {
+				System.err.println(e.toString());
+			}
+		}
 	}
 }
