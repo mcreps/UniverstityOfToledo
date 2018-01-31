@@ -10,7 +10,7 @@ All neccessary class and jars files that are necessary to complete the course.
 4. Add slf4j-api-1.7.25.jar to the classpath
 5. Add slf4j-log4j12-1.7.25.jar to the classpath
 6. Add DatabaseProperties.jar to classpath
-7. Add log4j.properties fiel to src directory
+7. Add log4j.properties file to src directory
 8. Add database.properties to root folder
 9. Build and save a database.properties files in the root directory
 10. Test to make sure you can connect to the database
