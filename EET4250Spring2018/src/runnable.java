@@ -44,6 +44,11 @@ public class runnable {
 			InsertCourses insertCourses = new InsertCourses();
 			insertCourses.inserts(connection);
 		}
+		
+		if ("ii".equals(name)) {
+			InsertInstructor ii = new InsertInstructor();
+			ii.insertInstructor(connection);
+		}
 
 		
 		/* Close the database connection */
