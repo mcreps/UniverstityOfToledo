@@ -46,11 +46,11 @@ public class InsertCourses {
 				ps.setString(4, semester);
 				ps.setInt(5, yearOffered);
 				rowsAffected =+ ps.executeUpdate();
-
 			}
 			catch (SQLException e) {
 				logger.error(e.toString());
 			}
 		}	
+		logger.debug("Rows Affected: "+rowsAffected);
 	}
 }
