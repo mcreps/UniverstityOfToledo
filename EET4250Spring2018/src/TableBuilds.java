@@ -1,15 +1,23 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class TableBuilds {
 	
-	private static Logger logger = LoggerFactory.getLogger(TableBuilds.class);	
+	private static final Logger logger = LoggerFactory.getLogger(TableBuilds.class);
 	
-	private boolean tableExists(Connection connection, String tableName) {
+	/**
+	 * 
+	 * @param connection
+	 * @param tableName
+	 * @return
+	 */
+	public static boolean tableExists(Connection connection, String tableName) {
 		
 		logger.debug("Entering tableExists connection: {}, tableName: {}", new Object[]{connection, tableName});
 		try {
@@ -25,17 +33,25 @@ public class TableBuilds {
 	}
 	
 	
-	public void buildTables(Connection connection) {
+	/**
+	 * builds the required tables for EET4250
+	 * @param connection
+	 */
+	public static void buildTables(Connection connection) {
 		
-		String instructorSql = "CREATE Table `Instructor` ( " + 
+		logger.debug("Entering table builds");
+		HashMap<String, String> tables = new HashMap<>();
+		
+		String sql = "CREATE Table `Instructor` ( " + 
 				"  `InstructorRowId` int(11) NOT NULL AUTO_INCREMENT, " + 
 				"  `FirstName` varchar(50) NOT NULL DEFAULT '', " + 
 				"  `LastName` varchar(50) NOT NULL DEFAULT '', " + 
 				"  `ProfessorRating` varchar(15) NOT NULL DEFAULT '', " + 
 				"  PRIMARY KEY (`InstructorRowId`) " + 
 				") ENGINE=InnoDB DEFAULT CHARSET=latin1";
+		tables.put("Instructor", sql);
 		
-		String courseSql = "CREATE Table `Course` ( " + 
+		sql = "CREATE Table `Course` ( " + 
 				"  `CourseRowId` int(11) NOT NULL AUTO_INCREMENT, " + 
 				"  `CourseId` varchar(15) NOT NULL DEFAULT '', " + 
 				"  `InstructorId` int(11) NOT NULL DEFAULT '0', " + 
@@ -45,31 +61,53 @@ public class TableBuilds {
 				"  PRIMARY KEY (`CourseRowId`), " + 
 				"  UNIQUE KEY `KEY1` (`CourseId`,`Semester`,`Year`) "+
 				") ENGINE=InnoDB DEFAULT CHARSET=latin1";
+		tables.put("Course", sql);
+	
+		sql = "CREATE TABLE `Student` ( " +
+				  " `StudentId` int(11) NOT NULL AUTO_INCREMENT, " + 
+				  " `Firstname` varchar(45) DEFAULT '', " + 
+				  " `Lastname` varchar(45) DEFAULT ''," + 
+				  " `Address` varchar(45) DEFAULT ''," + 
+				  " `City` varchar(45) DEFAULT ''," + 
+				  " `State` varchar(2) DEFAULT ''," + 
+				  " `PostCode` varchar(45) DEFAULT ''," + 
+				  " `Email` varchar(128) DEFAULT ''," + 
+				  " `PhoneNo` varchar(15) DEFAULT ''," + 
+				  " PRIMARY KEY (`StudentId`)," + 
+				  " UNIQUE KEY `KEY1` (`Firstname`,`Lastname`)" + 
+				  " ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
+		tables.put("Student", sql);
 		
-		logger.debug("Entering table builds");
+		sql = "CREATE TABLE `StudentGrades` ( " +
+				" `RowId` int(11) NOT NULL AUTO_INCREMENT, " + 
+				" `LinkerId` int(11) NOT NULL, " + 
+				" `StudentId` int(11) NOT NULL, " + 
+				" `GradeRecieved` char(2) NOT NULL DEFAULT '', " + 
+				" `SemesterTaken` varchar(45) NOT NULL DEFAULT '', " + 
+				" PRIMARY KEY (`RowId`) " + 
+				" ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
+		tables.put("StudentGrades", sql);
 		
-		if (!tableExists(connection, "Course")) {
-			try {
-				PreparedStatement ps = connection.prepareStatement(courseSql);
-				ps.executeUpdate(courseSql);
-				logger.debug("Course table built");
-			}
-			catch (SQLException e)
-			{
-				System.err.println(e.toString());
-			}
-		}
 		
-		if (!tableExists(connection, "Instructor")) {
-			try {
-				PreparedStatement ps = connection.prepareStatement(instructorSql);
-				ps.executeUpdate(instructorSql);
-				logger.debug("Instructor table built");
+		//  Add all the tables
+		for(Map.Entry<String, String> entry : tables.entrySet()) {
+			String tableName = entry.getKey();
+		    sql = entry.getValue();
+			
+		    if (!tableExists(connection, tableName)) {
+				try {
+					PreparedStatement ps = connection.prepareStatement(sql);
+					ps.executeUpdate(sql);
+					logger.debug("Course table built");
+				}
+				catch (SQLException e)
+				{
+					logger.debug("SQLException: " + e.toString());
+				}
 			}
-			catch (SQLException e)
-			{
-				System.err.println(e.toString());
-			}
+		    else {
+		    	logger.debug("Table " + tableName + " already exists.");
+		    }
 		}
 	}
 }

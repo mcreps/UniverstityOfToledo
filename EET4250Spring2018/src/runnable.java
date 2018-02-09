@@ -17,6 +17,10 @@ public class runnable {
 		if (null == connection) {
 			System.exit(1);
 		}
+		
+		// Build all the required tables
+		TableBuilds.buildTables(connection);
+		
 		/* Open scanner for std inout */
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter Assignment Name: ");
@@ -38,16 +42,14 @@ public class runnable {
 		
 		if ("ic1".equals(name)) {
 			logger.debug("Running Inclass 1");
-			TableBuilds tb = new TableBuilds();
-			tb.buildTables(connection);
-			
+
 			InsertCourses insertCourses = new InsertCourses();
 			insertCourses.inserts(connection);
 		}
-
-		
+	
 		/* Close the database connection */
 		databaseManager.closeConnection(connection);
+		scanner.close();
 		logger.debug("Program completed");
 	}
 }
