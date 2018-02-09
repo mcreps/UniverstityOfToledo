@@ -46,7 +46,34 @@ public class runnable {
 			InsertCourses insertCourses = new InsertCourses();
 			insertCourses.inserts(connection);
 		}
-	
+		
+		if ("ii".equals(name)) {
+			InsertInstructor ii = new InsertInstructor();
+			ii.insertInstructor(connection);
+		}
+		
+		if ("object".equals(name)) {
+			InsertCourses ii = new InsertCourses();
+			for(int x=0;x<4;x++) {
+				Course course = new Course();
+				System.out.print("Enter Course Id: ");
+				course.setCourseId(scanner.nextLine());
+				
+				System.out.print("Enter Instructor Id: ");
+				course.setInstructorId(Integer.parseInt(scanner.nextLine()));
+				
+				System.out.print("Enter Credit Hours: ");
+				course.setCreditHrs(Integer.parseInt(scanner.nextLine()));			
+				
+				System.out.print("Enter Semester: ");
+				course.setSemester(scanner.nextLine());
+				
+				System.out.print("Enter Year Offered: ");
+				course.setYear(Integer.parseInt(scanner.nextLine()));
+				ii.inserts(connection, course);
+			}
+		}
+
 		/* Close the database connection */
 		databaseManager.closeConnection(connection);
 		scanner.close();
