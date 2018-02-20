@@ -28,6 +28,10 @@ public class runnable {
 		/* get the user input and store in name */
 		String name = scanner.nextLine();
 		
+		if ("objectex".equals(name)) {
+			Object_Example.fetch(connection);
+		}
+		
 		if ("ex1".equals(name)) {
 			logger.debug("Running Example 1");
 			Example1 ex1 = new Example1();
@@ -72,8 +76,14 @@ public class runnable {
 				course.setYear(Integer.parseInt(scanner.nextLine()));
 				ii.inserts(connection, course);
 			}
-		}
+			
 
+		}
+	
+		if ("joins".equals(name)) {
+			Joins.courseJoins(connection);
+		}
+		
 		/* Close the database connection */
 		databaseManager.closeConnection(connection);
 		scanner.close();
