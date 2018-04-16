@@ -88,6 +88,36 @@ public class TableBuilds {
 				" ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
 		tables.put("StudentGrades", sql);
 		
+		sql = "CREATE TABLE `FooBar` ( " + 
+				"  `FooBarId` INT NOT NULL AUTO_INCREMENT, " + 
+				"  `FooBarcol` VARCHAR(45) NULL, " + 
+				"  `FooBarcol1` VARCHAR(45) NULL, " + 
+				"  `FooBarcol2` VARCHAR(45) NULL, " + 
+				"  `FooBarcol3` VARCHAR(45) NULL, " + 
+				"  `FooBarcol4` VARCHAR(45) NULL, " + 
+				"  PRIMARY KEY (`FooBarId`))";
+		tables.put("FooBar", sql);
+		
+		sql = "CREATE TABLE `Transaction_AccountHolder` ( " +
+				  " `AccountNo` VARCHAR(15) NOT NULL, " +
+				  " `FirstName` VARCHAR(45) NULL, " + 
+				  " `LastName` VARCHAR(45) NULL, " +
+				  " PRIMARY KEY (`AccountNo`))";
+		tables.put("Transaction_AccountHolder", sql);
+
+		sql = "CREATE TABLE `Transaction_Account` ( " + 
+				"  `AccountNo` varchar(15) NULL, " + 
+				"  `Descc` varchar(45) NULL, " + 
+				"  PRIMARY KEY (`AccountNo`))";
+		tables.put("Transaction_Account", sql);
+		
+		sql = "CREATE TABLE `Transaction_Amount` ( " + 
+				"  `TransId` int(20) AUTO_INCREMENT NOT NULL, " + 
+				"  `Descc` varchar(45) NULL, " + 
+				"  `Amount` DECIMAL(14,2) NULL, " + 
+				"  PRIMARY KEY (`TransId`))";
+		tables.put("Transaction_Amount", sql);		
+		
 		
 		//  Add all the tables
 		for(Map.Entry<String, String> entry : tables.entrySet()) {

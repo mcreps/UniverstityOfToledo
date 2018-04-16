@@ -21,7 +21,7 @@ public class Object_Example {
 					" JOIN Object ON Object.idObject = Data_Output.Object " + 
 					" GROUP BY Object";
 			PreparedStatement ps =connection.prepareStatement(sql);
-			ResultSet rs = ps.executeQuery();			
+			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				logger.debug("ObjectName: "+ rs.getString("ObjName") + 
 						", MaxHeight: "+rs.getDouble("MH") + 
