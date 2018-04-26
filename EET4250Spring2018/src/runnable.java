@@ -33,6 +33,9 @@ public class runnable {
 		System.out.printf("8. Advanced Topics\n");
 		System.out.printf("9. Instructor Who Teaches MTH1010\n");
 		System.out.printf("10. FooBar\n");
+		System.out.printf("11. Simple\n");
+		System.out.printf("12. UT_Student\n");
+		System.out.printf("13. UT_Student Balances\n");
 		
 		/* Open scanner for std inout */
 		Scanner scanner = new Scanner(System.in);
@@ -130,6 +133,52 @@ public class runnable {
 				fooBarList.add(f);	
 			}
 			InsertFooBar.insertFoo(connection, fooBarList);
+			break;
+		case "11":
+			for(int x=0; x<3;x++) {
+				Fb1 fb = new Fb1();
+					
+				System.out.println("Enter FooBar Col1: ");
+				fb.setCol1((scanner.nextLine()));
+				System.out.println("Enter FooBar Col2: ");
+				fb.setCol2((scanner.nextLine()));
+				fb.setRowid(Simple.getNextNumber(connection));
+			
+				if(!Simple.rowExists(connection, fb.getCol1(), fb.getCol2())) {
+					if (Simple.addRow(connection, fb)) {
+						logger.debug("Row added..." + fb.toString());
+					}else {
+						logger.debug("Row not added..." + fb.toString());
+					}
+				}else {
+					logger.debug("Row already exists..." + fb.toString());
+				}
+			}
+			break;
+		case "12":
+			System.out.println("Enter Firstname: ");
+			String fname = scanner.nextLine();
+			System.out.println("Enter Lastname: ");
+			String lname = scanner.nextLine();
+			System.out.println("Enter Email: ");
+			String email = scanner.nextLine();			
+			int studentId = UTStudents.addStudent(connection, fname, lname, email);
+			if (studentId > 0) {
+				for(int x=1;x<=5;x++) {
+					if ((x % 2) != 0) {
+						UTStudents.addTransaction(connection, studentId, 1000 * x);
+					}
+					else {
+						UTStudents.addTransaction(connection, studentId, -1000 * x);
+					}
+				}
+			}
+			else {
+				logger.debug("Student not added.");
+			}
+			break;
+		case "13":
+				UTStudents.getBalanceByStudentID(connection);
 			break;
 		};
 		
